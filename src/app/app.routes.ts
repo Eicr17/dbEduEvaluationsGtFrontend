@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { CreacionCuestionarioComponent } from './business/cuestionario/creacion-cuestionario/creacion-cuestionario.component';
+import { CuestionariosComponent } from './business/cuestionario/cuestionarios/cuestionarios/cuestionarios.component';
 
 export const routes: Routes = [
     {
@@ -17,6 +19,15 @@ export const routes: Routes = [
                 path: 'tables',
                 loadComponent: () => import('./business/tables/tables.component')
             },
+
+            {
+                path:'cuestionarios', component: CuestionariosComponent
+            },
+
+            {
+                path:'creacion-cuestionarios', component: CreacionCuestionarioComponent
+            },
+            
             {
                 path: '',
                 redirectTo: 'dashboard',
