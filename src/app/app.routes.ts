@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { CreacionCuestionarioComponent } from './business/cuestionario/creacion-cuestionario/creacion-cuestionario.component';
 import { CuestionariosComponent } from './business/cuestionario/cuestionarios/cuestionarios/cuestionarios.component';
+import { AlumnoComponent } from './business/Alumno/alumno/alumno.component';
+import { CatedraticoComponent } from './business/catedratico/catedratico/catedratico.component';
+import { GradoComponent } from './business/grado/grado/grado.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +29,19 @@ export const routes: Routes = [
 
             {
                 path:'creacion-cuestionarios', component: CreacionCuestionarioComponent
+            },
+
+
+            {
+                path: 'alumno' , component: AlumnoComponent
+            },
+
+             {
+                path: 'catedratico', component: CatedraticoComponent
+             },
+            
+            {
+                path: 'grado', component: GradoComponent
             },
             
             {
