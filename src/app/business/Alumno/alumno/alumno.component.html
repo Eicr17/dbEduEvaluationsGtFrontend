@@ -4,7 +4,7 @@
       Alumnos
     </h1>
    
-    <button onclick="document.getElementById('miModal').showModal()" 
+    <button onclick="document.getElementById('ModalAlumno').showModal()" 
       class=" mt-4 w-fit px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors">
      Agregar Alumno
     </button>
@@ -50,28 +50,69 @@
 
 
 <!-- Ventana Modal -->
-<dialog id="miModal" class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/50 w-full max-w-md open:animate-fade-in">
+<dialog id="ModalAlumno" class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/50 w-full max-w-md open:animate-fade-in">
   <div class="bg-white p-6 flex flex-col gap-4">
     
     <!-- Encabezado -->
     <div class="flex justify-between items-center border-b pb-3">
       <h3 class="text-xl font-bold text-gray-800">Título del Modal</h3>
-      <button onclick="document.getElementById('miModal').close()" class="text-gray-400 hover:text-gray-600 font-bold text-xl">
+      <button onclick="document.getElementById('ModalAlumno').close()" class="text-gray-400 hover:text-gray-600 font-bold text-xl">
         &times;
       </button>
     </div>
 
-    <!-- Contenido -->
-    <p class="text-gray-600 text-sm">
-      Este es el cuerpo del modal. Aquí puedes colocar texto, formularios o cualquier elemento interactivo que necesites mostrar.
-    </p>
+    
+    <!-- Contenido / Formulario -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- Fila 1 / Columna 1 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">No. Alumno</label>
+        <input type="text"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 1 / Columna 2 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Grado</label>
+        <select
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none bg-white text-gray-700">
+          <option value="" disabled selected>Seleccionar grado...</option>
+          <option value="lic">A</option>
+          <option value="ing">B</option>
+          <option value="msc">C</option>
+        </select>
+      </div>
+
+      <!-- Fila 2 / Ocupa las 2 columnas -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input type="text"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 3 / Columna 1 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+        <input type="text"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 3 / Columna 2 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
+        <input type="email"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+    </div>
 
     <!-- Botones de acción -->
     <div class="flex justify-end gap-3 pt-3 border-t">
-      <button onclick="document.getElementById('miModal').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm font-medium transition-colors">
+      <button onclick="document.getElementById('ModalAlumno').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm font-medium transition-colors">
         Cancelar
       </button>
-      <button onclick="document.getElementById('miModal').close()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors">
+      <button onclick="document.getElementById('ModalAlumno').close()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors">
         Confirmar
       </button>
     </div>
