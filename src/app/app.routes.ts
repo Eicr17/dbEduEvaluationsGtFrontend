@@ -4,6 +4,7 @@ import { CuestionariosComponent } from './business/cuestionario/cuestionarios/cu
 import { AlumnoComponent } from './business/Alumno/alumno/alumno.component';
 import { CatedraticoComponent } from './business/catedratico/catedratico/catedratico.component';
 import { GradoComponent } from './business/grado/grado/grado.component';
+import { ResponderCuestionarioComponent } from './business/cuestionario/respuesta-cuestionario/responder-cuestionario/responder-cuestionario.component';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,10 @@ export const routes: Routes = [
             
             {
                 path: 'grado', component: GradoComponent
+            },
+
+            {
+                path: 'responder-cuestionario',  component: ResponderCuestionarioComponent
             },
             
             {
