@@ -49,7 +49,7 @@
     </table>
 </div>
 
-
+<form  [formGroup]="FormularioCatedratico">
 <dialog id="ModalCat" class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/50 w-full max-w-lg open:animate-fade-in">
   <div class="bg-white p-6 flex flex-col gap-4">
 
@@ -69,6 +69,7 @@
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">No. Catedrático</label>
         <input type="text"
+        formControlName="idCatedratico"
           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
       </div>
 
@@ -89,6 +90,7 @@
       <div class="md:col-span-2">
         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
         <input type="text"
+          formControlName="nombreCatedratico"
           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
       </div>
 
@@ -96,6 +98,7 @@
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
         <input type="email"
+          formControlName="correo"
           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
       </div>
 
@@ -103,6 +106,7 @@
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
         <input type="text"
+          formControlName="telefono"
           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
       </div>
 
@@ -115,10 +119,11 @@
         Cancelar
       </button>
       <button onclick="document.getElementById('ModalCat').close()"
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors">
+        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors" type="submit">
         Confirmar
       </button>
     </div>
 
   </div>
 </dialog>
+</form>
