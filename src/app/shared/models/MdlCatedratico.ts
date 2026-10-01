@@ -1,5 +1,5 @@
 export interface MdlCatedratico {
-    idCatedratico:Number,
+    idCatedratico:number,
     idGrado: number,
     nombreCatedratico: string
     correo: string,
@@ -7,15 +7,17 @@ export interface MdlCatedratico {
 }
 
 export interface MdlCatedraticoInsert{
-    idCatedratico:Number,
+    idCatedratico:number,
     idGrado: number,
+    nombreCatedratico: string
     correo: string,
     telefono: number,
 }
 
 export interface MdlCatedraticoUpdate {
-    idCatedratico:Number,
-    idGrado: number,
+    idCatedratico:number,
+    idGrado: number
+    nombreCatedratico: string,
     correo: string,
     telefono: number,
 }

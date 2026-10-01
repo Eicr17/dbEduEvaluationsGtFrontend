@@ -1,50 +1,48 @@
 <div class="min-h-screen bg-gray-50 p-6">
   <div class="max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
 
-  
-
     <div class="border-b border-gray-200 pb-4">
 
       <h1 class="text-xl font-bold text-gray-800 mb-4">
-          Parcial 1
+        Parcial 1
       </h1>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
-          <span class="text-xs font-bold text-gray-500" >
-             Alumno:
+          <span class="text-xs font-bold text-gray-500">
+            Alumno:
           </span>
 
           <span class="text-xs text-gray-700 ml-1">
             Juan Perez
           </span>
 
-        <div>
-          <span class="text-xs font-bold text-gray-500">
-            Materia:
-          </span>
-          <span class="text-xs text-gray-700 ml-1">
-            Matemáticas
-          </span>
-        </div>
+          <div>
+            <span class="text-xs font-bold text-gray-500">
+              Materia:
+            </span>
+            <span class="text-xs text-gray-700 ml-1">
+              Matemáticas
+            </span>
+          </div>
 
-        <div>
-          <span class="text-xs font-bold text-gray-500">
-            Catedrático:
-          </span>
-          <span class="text-xs text-gray-700 ml-1">
-            Carlos López
-          </span>
-        </div>
+          <div>
+            <span class="text-xs font-bold text-gray-500">
+              Catedrático:
+            </span>
+            <span class="text-xs text-gray-700 ml-1">
+              Carlos López
+            </span>
+          </div>
 
-        <div>
-          <span class="text-xs font-bold text-gray-500">
-            Fecha:
-          </span>
-          <span class="text-xs text-gray-700 ml-1">
-            28/09/2026
-          </span>
-        </div>
+          <div>
+            <span class="text-xs font-bold text-gray-500">
+              Fecha:
+            </span>
+            <span class="text-xs text-gray-700 ml-1">
+              28/09/2026
+            </span>
+          </div>
 
         </div>
       </div>
@@ -53,126 +51,108 @@
     </div>
 
 
-    <form class="space-y-6">
-          <!-- =============================== -->
+    <form [formGroup]="FormRespuesta" class="space-y-6">
+      <!-- =============================== -->
 
-    <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center">
 
-      <span class="text-xs font-bold text-gray-600">
-        Pregunta 2 de 5
-      </span>
-
-      <span class="text-xs text-gray-400">
-        2 / 5
-      </span>
-
-    </div>
-
-
-      <!-- Pregunta 1 -->
-      <div class="p-4 border border-gray-200 rounded-xl bg-gray-50/50 space-y-4s">
-
-       
-        <h2 class="text-sm font-semibold text-gray-800">
-
-        <span class="text-blue-600 font-bold">
-          2.
+        <span class="text-xs font-bold text-gray-600">
+          Pregunta {{indicePregunta + 1}}
+          de {{pregunta.length}}
         </span>
 
-        ¿Cuáles de los siguientes números son pares?
+        <span class="text-xs text-gray-400">
+          {{indicePregunta + 1}} / {{pregunta.length}}
+        </span>
 
-      </h2>
+      </div>
+
+      <div class="p-4 border border-gray-200 rounded-xl
+           bg-gray-50/50 space-y-4">
+
+        <h2 class="text-sm font-semibold text-gray-800">
+
+          <span class="text-blue-600 font-bold">
+            {{ indicePregunta + 1 }}.
+          </span>
+
+          {{ preguntaActual.descripcion }}
+
+        </h2>
 
 
-      <!-- =============================== -->
-      <!-- RESPUESTAS -->
-      <!-- =============================== -->
+      </div>
 
       <div class="grid grid-cols-1 gap-2">
 
+        <!--Tipo: Seleccion Multiple-->
+        @if(preguntaActual.idTipoPregunta === 1){
 
-        <!-- CHECKBOX -->
-        <label
-          class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl bg-white hover:bg-blue-50/40 cursor-pointer">
+        @for(detalle of detallesPreguntaActual; track detalle.idPreguntaDetalle){
 
-          <input
-            type="checkbox"
-            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
+        <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl
+               bg-white hover:bg-blue-50/40 cursor-pointer">
 
+          <input type="checkbox" [value]="detalle.idPreguntaDetalle"
+            (change)="seleccionarMultiple(detalle.idPreguntaDetalle, $event)"
+            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
           <span class="text-xs text-gray-700">
-            2
+            {{ detalle.descripcion }}
           </span>
 
         </label>
 
 
-        <label
-          class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl bg-white hover:bg-blue-50/40 cursor-pointer">
+        }
 
-          <input
-            type="checkbox"
-            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
+        }
 
+        <!--Tipo: Seleccion Unica-->
+        @if(preguntaActual.idTipoPregunta === 2){
+
+        @for(detalle of detallesPreguntaActual; track detalle.idPreguntaDetalle){
+
+        <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl
+               bg-white hover:bg-blue-50/40 cursor-pointer">
+
+          <input type="radio" formControlName="respuestaUnica" [value]="detalle.idPreguntaDetalle"
+            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
           <span class="text-xs text-gray-700">
-            4
+            {{ detalle.descripcion }}
           </span>
 
         </label>
 
 
-        <label
-          class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl bg-white hover:bg-blue-50/40 cursor-pointer">
+        }
 
-          <input
-            type="checkbox"
-            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-
-          <span class="text-xs text-gray-700">
-            5
-          </span>
-
-        </label>
-
-
-        <label
-          class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl bg-white hover:bg-blue-50/40 cursor-pointer">
-
-          <input
-            type="checkbox"
-            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-
-          <span class="text-xs text-gray-700">
-            8
-          </span>
-
-        </label>
+        }
 
       </div>
 
-    </div>
-
-
-    <!-- =============================== -->
-    <!-- BOTONES -->
-    <!-- =============================== -->
-
-    <div class="flex justify-end">
-
-      <button
-        type="button"
-        class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-sm transition-colors cursor-pointer">
-
-        Siguiente Pregunta
-
-      </button>
-
-    </div>
 
     </form>
 
+    <!--Boton de Seguir-->
+    <div class="flex justify-end">
+
+        <!--Siguiente Pregunta-->
+      @if(indicePregunta < pregunta.length - 1){ 
+        <button type="button" (click)="siguientePregunta()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700
+             text-white text-xs font-bold rounded-xl
+             shadow-sm transition-colors cursor-pointer">
+        Siguiente Pregunta
+        </button>
+        }
+
+        <!--Ultima Pregunta-->
+       @if(indicePregunta === pregunta.length - 1){
+
+        <button type="button" (click)="enviarCuestionario()" class="px-5 py-2.5 bg-green-600 hover:bg-green-700
+             text-white text-xs font-bold rounded-xl
+             shadow-sm transition-colors cursor-pointer">
+          Enviar Cuestionario
+        </button>
+        }
   </div>
 </div>

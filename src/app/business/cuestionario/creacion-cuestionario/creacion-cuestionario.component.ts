@@ -12,6 +12,12 @@ import { Console } from 'console';
 })
 export class CreacionCuestionarioComponent {
 
+
+  FormCreacionCuestionario!: FormGroup;
+
+
+
+
   private readonly fb = inject(FormBuilder);
 
 
@@ -39,6 +45,7 @@ export class CreacionCuestionarioComponent {
     TiempoLimiteMinutos: [45,[Validators.required, Validators.min(1)]],
     Id_Materia: [null, Validators.required],
     Id_Grado: [null, Validators.required],
+    
     Preguntas: this.fb.array([])
 
   })

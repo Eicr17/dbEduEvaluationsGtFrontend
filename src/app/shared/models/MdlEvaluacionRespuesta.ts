@@ -1,30 +1,26 @@
-export interface MdlCuestionarioRespuesta{
+export interface MdlEvaluacionRespuesta{
     idRespuesta : number,
-    idAlumno : string,
     idCuestionario: number,
     idPregunta: number,
     ponderacion: number,
     fechaRegistro : Date,
-    estado :number,   
 }
 
-export interface MdlCuestionarioRespuestaInsert {
+export interface MdlEvaluacionRespuestaInsert {
     idRespuesta : number,
     idAlumno : string,
     idCuestionario: number,
     idPregunta: number,
     ponderacion: number,
     fechaRegistro : Date,
-    estado :number,
 }
 
 
-export interface MdlCuestionarioRespuestaUpdate {
+export interface MdlEvaluacionRespuestaUpdate {
     idRespuesta : number,
     idAlumno : string,
     idCuestionario: number,
     idPregunta: number,
     ponderacion: number,
     fechaRegistro : Date,
-    estado :number,
 }

@@ -5,6 +5,7 @@ export interface MdlCuestionario{
     nombreCuestionario : string,
     descripcion : string,
     fechainicio : Date,
+    fechaLimite: Date,
     tiempoLimiteMinutos: number,
 }
 
@@ -15,6 +16,7 @@ export interface MdlCuestionarioInsert {
     nombreCuestionario: string,
     descripcion : string,
     fechainicio : Date,
+    fechaLimite: Date,
     tiempoLimiteMinutos: number,
 }
 
@@ -25,5 +27,6 @@ export interface MdlCuestionarioUpdate {
     nombreCuestionario: string,
     descripcion : string,
     fechainicio : Date,
+    fechaLimite: Date,
     tiempoLimiteMinutos: number,
 }

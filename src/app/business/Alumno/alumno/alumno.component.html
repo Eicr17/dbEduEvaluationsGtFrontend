@@ -5,7 +5,9 @@
     </h1>
    
     <button onclick="document.getElementById('ModalAlumno').showModal()" 
-      class=" mt-4 w-fit px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors">
+      class=" mt-4 w-fit px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors"
+      (click)="NuevoAlumno()">
+      
      Agregar Alumno
     </button>
   </div>
@@ -21,27 +23,70 @@
         <th scope="col" class="px-6 py-3">Nombre</th>
         <th scope="col" class="px-6 py-3">Apellido</th>
         <th scope="col" class="px-6 py-3">Correo</th>
+        <th scope="col" class="px-6 py-3">Acciones</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white">
-      <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 font-medium text-gray-900">Ana Pérez</td>
-        <td class="px-6 py-4">Desarrolladora Frontend</td>
-        <td class="px-6 py-4">
-          <span class="px-2.5 py-0.5 text-xs font-semibold text-green-800 bg-green-100 rounded-full">Activo</span>
+     <tr *ngFor="let item of lstAlumnoInsert; let i = index" class="hover:bg-gray-50">
+
+        <td class="px-6 py-4 font-medium text-gray-900">
+          {{ item.idAlumno }}
         </td>
+
         <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
+          {{ObtenerNombreGrado(item.idGrado) }}
         </td>
-      </tr>
-      <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 font-medium text-gray-900">Carlos Gómez</td>
-        <td class="px-6 py-4">Diseñador UI/UX</td>
+
         <td class="px-6 py-4">
-          <span class="px-2.5 py-0.5 text-xs font-semibold text-yellow-800 bg-yellow-100 rounded-full">En pausa</span>
+          {{ item.nombreAlumno }}
         </td>
+
+         <td class="px-6 py-4">
+          {{ item.apellidoAlumno }}
+        </td>
+
         <td class="px-6 py-4">
-          <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
+          {{ item.correo }}
+        </td>
+
+        <td class="px-6 py-4">
+      <div class="flex items-center gap-4">
+          <button type="button"  
+            (click)="EditarAlumno(item, i)" class="p-2
+             text-blue-600
+             bg-blue-50
+             rounded-lg
+             hover:bg-blue-100
+             hover:text-blue-700
+             transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+
+            </svg>
+            Editar
+          </button>
+
+          <button type="button" (click)="EliminarAlumno(item.idAlumno)" class="p-2
+             text-red-600
+             bg-red-50
+             rounded-lg
+             hover:bg-red-100
+             hover:text-red-700
+             transition-colors">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3M4 7h16" />
+
+            </svg>
+            
+            Eliminar
+          </button>
+    </div>
         </td>
       </tr>
     </tbody>
@@ -49,7 +94,7 @@
 </div>
 
 
-<form [formGroup]="FormularioAlumno">
+<form [formGroup]="FormularioAlumno" (ngSubmit)="AgregarAlumno()" >
 <!-- Ventana Modal -->
 <dialog id="ModalAlumno" class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/50 w-full max-w-md open:animate-fade-in">
   <div class="bg-white p-6 flex flex-col gap-4">
@@ -81,9 +126,9 @@
           formControlName="idGrado"
           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none bg-white text-gray-700">
           <option value="" disabled selected>Seleccionar grado...</option>
-          <option value="lic">A</option>
-          <option value="ing">B</option>
-          <option value="msc">C</option>
+          <option value="1">Primero Basico</option>
+          <option value="2">Segundo Basico</option>
+          <option value="3">Tercero Basico</option>
         </select>
       </div>
 
@@ -121,6 +166,87 @@
       <button onclick="document.getElementById('ModalAlumno').close()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
       type="submit">
         Confirmar
+      </button>
+    </div>
+
+  </div>
+</dialog>
+</form>
+
+
+
+<form [formGroup]="FormularioAlumno" (ngSubmit)="GuardarEdicionAlumno()">
+<!-- Ventana Modal -->
+<dialog id="ModalEditarAlumno" class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/50 w-full max-w-md open:animate-fade-in">
+  <div class="bg-white p-6 flex flex-col gap-4">
+    
+    <!-- Encabezado -->
+    <div class="flex justify-between items-center border-b pb-3">
+      <h3 class="text-xl font-bold text-gray-800">Edicion del Alumno</h3>
+      <button onclick="document.getElementById('ModalEditarAlumno').close()" class="text-gray-400 hover:text-gray-600 font-bold text-xl">
+        &times;
+      </button>
+    </div>
+
+    
+    <!-- Contenido / Formulario -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- Fila 1 / Columna 1 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">No. Alumno</label>
+        <input type="text"
+          formControlName="idAlumno"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 1 / Columna 2 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Grado</label>
+        <select
+          formControlName="idGrado"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none bg-white text-gray-700">
+          <option value="" disabled selected>Seleccionar grado...</option>
+          <option value="1">Primero Basico</option>
+          <option value="2">Segundo Basico</option>
+          <option value="3">Tercero Basico</option>
+        </select>
+      </div>
+
+      <!-- Fila 2 / Ocupa las 2 columnas -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+        <input type="text"
+          formControlName="nombreAlumno"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 3 / Columna 1 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+        <input type="text"
+        formControlName="apellidoAlumno"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+      <!-- Fila 3 / Columna 2 -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
+        <input type="email"
+          formControlName="correo"
+          class="w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm outline-none" />
+      </div>
+
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex justify-end gap-3 pt-3 border-t">
+      <button onclick="document.getElementById('ModalEditarAlumno').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm font-medium transition-colors">
+        Cancelar
+      </button>
+      <button  class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
+      type="submit">
+        Guardar Cambios
       </button>
     </div>
 
