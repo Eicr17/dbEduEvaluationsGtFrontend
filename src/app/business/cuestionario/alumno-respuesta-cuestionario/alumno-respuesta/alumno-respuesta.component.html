@@ -1,1 +1,78 @@
-<p>alumno-respuesta works!</p>
+<div class="p-1">
+  <div class="flex flex-col mb-6">
+    <h1 class="text-xl font-bold text-gray-800">
+      Cuestionarios Disponibles
+    </h1>
+
+  </div>
+</div>
+
+<!-- 2. SECCIÓN DE TABLA DE ALUMNOS -->
+  <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden">
+    
+    <!-- Encabezado con Buscador y Filtros integrados -->
+    <div class="p-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-blue-gray-50">
+      <div>
+        <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900">Listado de Cuestionarios</h6>
+        <p class="antialiased font-sans text-sm leading-normal text-blue-gray-600 font-normal">Cuestionarios Asignados</p>
+      </div>
+
+    </div>
+
+    <!-- Contenido de la Tabla -->
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[640px] table-auto text-left">
+        <thead>
+          <tr class="bg-blue-gray-50/50">
+            <th class="border-b border-blue-gray-50 py-3 px-6">
+              <p class="block antialiased font-sans text-[11px] font-bold uppercase text-blue-gray-400">Nombre</p>
+            </th>
+            <th class="border-b border-blue-gray-50 py-3 px-6">
+              <p class="block antialiased font-sans text-[11px] font-bold uppercase text-blue-gray-400">Fecha</p>
+            </th>
+            <th class="border-b border-blue-gray-50 py-3 px-6 text-center">
+              <p class="block antialiased font-sans text-[11px] font-bold uppercase text-blue-gray-400">Estado</p>
+            </th>
+
+            <th class="border-b border-blue-gray-50 py-3 px-6 text-center">
+              <p class="block antialiased font-sans text-[11px] font-bold uppercase text-blue-gray-400">Responder</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-blue-gray-50">
+          
+          <!-- Fila 1 -->
+          <tr class="hover:bg-blue-gray-50/50 transition-colors">
+            <td class="py-3 px-6">
+              <p class="block antialiased font-sans text-sm font-semibold text-blue-gray-900">Matematico Parcial II</p>
+            </td>
+            <td class="py-3 px-6">
+              <p class="block antialiased font-sans text-sm font-normal text-blue-gray-600">12/08/2024</p>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                Sin Iniciar
+              </span>
+            </td>
+
+           
+                <td class="py-3 px-6 text-center">
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold">
+                 <a routerLink="/responder-cuestionario">
+               <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 ho   ver:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center leading-5">
+                Iniciar
+            </button>
+            </a>
+              </span>
+            </td>
+            
+            
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div> <!-- FIN DE TABLA -->
