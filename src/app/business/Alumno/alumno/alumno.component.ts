@@ -5,23 +5,25 @@ import { MdAlumno, MdAlumnoInsert, MdAlumnoUpdate } from '../../../shared/models
 import { AlumnoService } from '../../../shared/services/alumno.service';
 import { MdlGrado } from '../../../shared/models/MdlGrado';
 import { GradoService } from '../../../shared/services/grado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-alumno',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './alumno.component.html',
   styleUrl: './alumno.component.css'
 })
 export class AlumnoComponent {
   FormularioAlumno!: FormGroup;
 
-  lstAlumno: MdAlumno [] = [];
-  lstAlumnoInsert: MdAlumnoInsert [] = [];
-  lstAlumnoUpdate: MdAlumnoUpdate [] = [];
+  lstAlumno: MdAlumno[] = [];
+  lstAlumnoInsert: MdAlumnoInsert[] = [];
+  lstAlumnoUpdate: MdAlumnoUpdate[] = [];
 
   modoEditar: boolean = false;
   indiceEditar: number = -1;
+  intentenGuardar: boolean = true;
 
   lstGrado = [
     { idGrado: 1, nombreGrado: 'Primero Básico' },
@@ -31,145 +33,182 @@ export class AlumnoComponent {
 
 
 
-  constructor( private srv_Alumno: AlumnoService,
-      private srv_grado:GradoService,
-    private fb:FormBuilder
-  ){
+  constructor(private srv_Alumno: AlumnoService,
+    private srv_grado: GradoService,
+    private fb: FormBuilder
+  ) {
 
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.FormularioAlumno = this.fb.group({
-      idAlumno: ['',[Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
+      idAlumno: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
       idGrado: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
-      nombreAlumno:['',[Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
-      apellidoAlumno:['',[Validators.required, Validators.maxLength(150),Validators.minLength(1)]],
-      correo: ['',[Validators.required,  Validators.email, Validators.maxLength(150), Validators.minLength(1)]]
+      nombreAlumno: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
+      apellidoAlumno: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
+      correo: ['', [Validators.required, Validators.email, Validators.maxLength(150), Validators.minLength(1)]]
 
     })
 
   }
 
-AgregarAlumno() {
+  AgregarAlumno() {
 
-  if (this.FormularioAlumno.invalid) {
-    this.FormularioAlumno.markAllAsTouched();
-    return;
-  }
+    if (this.FormularioAlumno.invalid) {
+           this.MostrarFormularioInvalido('ModalAlumno');
+      return;
+    }
 
-  const alumno: MdAlumnoInsert = {
+    const alumno: MdAlumnoInsert = {
 
-    idAlumno:
-      this.FormularioAlumno.value.idAlumno,
+      idAlumno:
+        this.FormularioAlumno.value.idAlumno,
 
-    idGrado:
-      this.FormularioAlumno.value.idGrado,
+      idGrado:
+        this.FormularioAlumno.value.idGrado,
 
-    nombreAlumno:
-      this.FormularioAlumno.value.nombreAlumno,
-
-    apellidoAlumno:
-      this.FormularioAlumno.value.apellidoAlumno,
-
-    correo:
-      this.FormularioAlumno.value.correo
-  };
-
-  this.lstAlumnoInsert.push(alumno);
-  this.FormularioAlumno.reset();
-
-  const modal =
-    document.getElementById('ModalAlumno') as HTMLDialogElement;
-
-  modal.close();
-}
-
-  NuevoAlumno() {
-  this.modoEditar = false;
-  this.indiceEditar = -1
-
-  this.FormularioAlumno.reset();
-
-  const modal =
-    document.getElementById('ModalAlumno') as HTMLDialogElement;
-
-  modal.showModal();
-}
-
-
-GuardarEdicionAlumno() {
-
-  if (this.FormularioAlumno.invalid) {
-    this.FormularioAlumno.markAllAsTouched();
-    return;
-  }
-
-  if (this.indiceEditar === -1) {
-    return;
-  }
-
-  const alumno: MdAlumnoInsert = {
-
-    idAlumno:
-      this.FormularioAlumno.value.idAlumno,
-    idGrado:
-      Number(this.FormularioAlumno.value.idGrado),
-    nombreAlumno:
-      this.FormularioAlumno.value.nombreAlumno,
+      nombreAlumno:
+        this.FormularioAlumno.value.nombreAlumno,
 
       apellidoAlumno:
-      this.FormularioAlumno.value.apellidoAlumno,
+        this.FormularioAlumno.value.apellidoAlumno,
 
-    correo:
-      this.FormularioAlumno.value.correo,
-  };
+      correo:
+        this.FormularioAlumno.value.correo
+    };
 
-  this.lstAlumnoInsert[this.indiceEditar] =
-    alumno;
+    this.lstAlumnoInsert.push(alumno);
+    this.FormularioAlumno.reset();
 
-  this.indiceEditar = -1;
-  this.FormularioAlumno.reset();
+    const modal =
+      document.getElementById('ModalAlumno') as HTMLDialogElement;
 
-  const modal =
-    document.getElementById(
-      'ModalEditarAlumno'
-    ) as HTMLDialogElement;
+    modal.close();
 
-  modal.close();
-}
+    Swal.fire({
+      title: "Registro Insertado Exitosamente!",
+      icon: "success",
+      draggable: true
+    });
 
+  }
 
-EditarAlumno(
-  item: MdAlumnoInsert,
-  indice: number
-) {
+  NuevoAlumno() {
+    this.modoEditar = false;
+    this.indiceEditar = -1
 
-  this.indiceEditar = indice;
+    this.FormularioAlumno.reset();
+    this.FormularioAlumno.markAsPristine();
+    this.FormularioAlumno.markAsUntouched();
 
-  this.FormularioAlumno.patchValue({
-    idAlumno: item.idAlumno,
-    idGrado: item.idGrado,
-    nombreAlumno: item.nombreAlumno,
-    apellidoAlumno: item.apellidoAlumno,
-    correo: item.correo,
-  });
+    const modal =
+      document.getElementById('ModalAlumno') as HTMLDialogElement;
 
-  const modal =
-    document.getElementById(
-      'ModalEditarAlumno'
-    ) as HTMLDialogElement;
-
-  modal.showModal();
-}
+    modal.showModal();
+  }
 
 
- EliminarAlumno(idAlumno: string) {
-    this.lstAlumnoInsert =
-      this.lstAlumnoInsert.filter(
-        x => x.idAlumno !== idAlumno
-      );
+  GuardarEdicionAlumno() {
+
+    if (this.FormularioAlumno.invalid) {
+     this.MostrarFormularioInvalido('ModalEditarAlumno');
+      return;
+    }
+
+    if (this.indiceEditar === -1) {
+      return;
+    }
+
+    const alumno: MdAlumnoInsert = {
+
+      idAlumno:
+        this.FormularioAlumno.value.idAlumno,
+      idGrado:
+        Number(this.FormularioAlumno.value.idGrado),
+      nombreAlumno:
+        this.FormularioAlumno.value.nombreAlumno,
+
+      apellidoAlumno:
+        this.FormularioAlumno.value.apellidoAlumno,
+
+      correo:
+        this.FormularioAlumno.value.correo,
+    };
+
+    this.lstAlumnoInsert[this.indiceEditar] =
+      alumno;
+
+    this.indiceEditar = -1;
+
+    Swal.fire({
+      title: "Registro Actualizado Exitosamente!",
+      icon: "success",
+      draggable: true
+    });
+
+    this.FormularioAlumno.reset();
+
+    const modal =
+      document.getElementById(
+        'ModalEditarAlumno'
+      ) as HTMLDialogElement;
+
+    modal.close();
+  }
+
+
+  EditarAlumno(
+    item: MdAlumnoInsert,
+    indice: number
+  ) {
+
+    this.indiceEditar = indice;
+
+    this.FormularioAlumno.patchValue({
+      idAlumno: item.idAlumno,
+      idGrado: item.idGrado,
+      nombreAlumno: item.nombreAlumno,
+      apellidoAlumno: item.apellidoAlumno,
+      correo: item.correo,
+    });
+
+    const modal =
+      document.getElementById(
+        'ModalEditarAlumno'
+      ) as HTMLDialogElement;
+
+    modal.showModal();
+  }
+
+
+  EliminarAlumno(idAlumno: string) {
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, ¡bórralo!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.lstAlumnoInsert =
+          this.lstAlumnoInsert.filter(
+            x => x.idAlumno !== idAlumno
+          );
+        Swal.fire(
+          '¡Eliminado!',
+          'El registro ha sido borrado.',
+          'success'
+        )
+      }
+    })
+
+
   }
 
   ObtenerNombreGrado(idGrado: number): string {
@@ -180,6 +219,35 @@ EditarAlumno(
   }
 
 
-  
+  CerrarModal() {
+    this.FormularioAlumno.reset();
+    this.indiceEditar = -1;
+    this.modoEditar = false;
+
+    const modal = document.getElementById('ModalEditarAlumno') as HTMLDialogElement;
+    if (modal) {
+      modal.close();
+    }
+  }
+
+  async MostrarFormularioInvalido(idModal: string) {
+
+    this.intentenGuardar = true;
+    this.FormularioAlumno.markAllAsTouched();
+
+    const modal = document.getElementById(idModal) as HTMLDialogElement;
+
+    if (modal?.open) {
+      modal.close();
+    }
+
+    await Swal.fire({
+      title: "Formulario Inválido",
+      text: "Error, completa todos los campos correctamente",
+      icon: "warning",
+      confirmButtonText: "Aceptar"
+    });
+
+  }
 
 }

@@ -50,8 +50,33 @@
 
     </div>
 
+    @if(cuestionarioFinalizado){
+  <div class="space-y-6 text-center py-8">
+        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+          ✓
+        </div>
+        <h2 class="text-xl font-bold text-gray-800">¡Cuestionario Finalizado!</h2>
+        
+        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2 max-w-sm mx-auto">
+          <p class="text-sm text-gray-600">Alumno: <strong class="text-gray-800">Juan Perez</strong></p>
+          <p class="text-sm text-gray-600">Materia: <strong class="text-gray-800">Matemáticas</strong></p>
+          <hr class="border-gray-200">
+          <p class="text-lg font-bold text-blue-600">Nota Final: {{ notaFinal }} / 100</p>
+        </div>
 
-    <form [formGroup]="FormRespuesta" class="space-y-6">
+        <div class="pt-4">
+          <button routerLink="/Dashboard" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-sm transition-colors cursor-pointer">
+            Ir al Dashboard
+          </button>
+        </div>
+    
+      </div>
+
+      
+    }
+
+    @if(!cuestionarioFinalizado){
+<form [formGroup]="FormRespuesta" class="space-y-6">
       <!-- =============================== -->
 
       <div class="flex justify-between items-center">
@@ -94,6 +119,7 @@
                bg-white hover:bg-blue-50/40 cursor-pointer">
 
           <input type="checkbox" [value]="detalle.idPreguntaDetalle"
+        [checked]="estaSeleccionado(detalle.idPreguntaDetalle)"
             (change)="seleccionarMultiple(detalle.idPreguntaDetalle, $event)"
             class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
           <span class="text-xs text-gray-700">
@@ -127,13 +153,16 @@
         }
 
         }
+          
 
       </div>
 
-
+  
     </form>
 
-    <!--Boton de Seguir-->
+ 
+
+        <!--Boton de Seguir-->
     <div class="flex justify-end">
 
         <!--Siguiente Pregunta-->
@@ -148,11 +177,18 @@
         <!--Ultima Pregunta-->
        @if(indicePregunta === pregunta.length - 1){
 
-        <button type="button" (click)="enviarCuestionario()" class="px-5 py-2.5 bg-green-600 hover:bg-green-700
+       
+        <button type="button" (click)="enviarCuestionario()"  class="px-5 py-2.5 bg-green-600 hover:bg-green-700
              text-white text-xs font-bold rounded-xl
              shadow-sm transition-colors cursor-pointer">
           Enviar Cuestionario
         </button>
         }
   </div>
+  
+
+    }
+
+  
+   
 </div>
