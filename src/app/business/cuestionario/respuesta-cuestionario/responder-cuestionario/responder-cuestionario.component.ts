@@ -210,7 +210,7 @@ export class ResponderCuestionarioComponent {
       idPreguntaDetalle: 19,
       idPregunta: 5,
       descripcion: '3',
-      ponderacion: 50
+      ponderacion: 0
     },
 
 
@@ -226,7 +226,7 @@ export class ResponderCuestionarioComponent {
       idPreguntaDetalle: 21,
       idPregunta: 5,
       descripcion: '5',
-      ponderacion: 50
+      ponderacion: 100
     },
 
     {
