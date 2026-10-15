@@ -1,5 +1,6 @@
 <!-- 1. BARRA SUPERIOR PARA MÓVILES (Con el botón hamburguesa para abrir el menú) -->
-<div class="bg-gradient-to-br from-gray-800 to-gray-900 text-white flex justify-between items-center p-4 lg:hidden sticky top-0 z-40">
+<div
+  class="bg-gradient-to-br from-gray-800 to-gray-900 text-white flex justify-between items-center p-4 lg:hidden sticky top-0 z-40">
   <span class="font-bold text-base">EduEvaluationsGt</span>
   <button (click)="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/15 focus:outline-none" type="button">
     <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -9,17 +10,14 @@
 </div>
 
 <!-- 2. FONDO OSCURO (BACKDROP) CUANDO SE ABRE EN MÓVIL -->
-<div 
-  *ngIf="isSidebarOpen" 
-  (click)="toggleSidebar()" 
+<div *ngIf="isSidebarOpen" (click)="toggleSidebar()"
   class="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity">
 </div>
 
 <!-- 3. SIDEBAR RESPONSIVO -->
-<aside
-  [ngClass]="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+<aside [ngClass]="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
   class="bg-gradient-to-br from-gray-800 to-gray-900 fixed inset-y-0 left-0 z-50 my-0 lg:my-4 ml-0 lg:ml-4 h-full lg:h-[calc(100vh-32px)] w-72 rounded-none lg:rounded-xl transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-2xl lg:shadow-none flex flex-col">
-  
+
   <div class="relative border-b border-white/20 p-6 flex items-center justify-between">
     <a class="flex items-center gap-4" href="#/">
       <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
@@ -27,11 +25,10 @@
       </h6>
     </a>
     <!-- Botón de cerrar (X) solo visible en móviles dentro del menú -->
-    <button
-      (click)="toggleSidebar()"
-      class="w-8 h-8 rounded-lg text-xs text-white hover:bg-white/15 grid lg:hidden place-items-center"
-      type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-5 w-5 text-white">
+    <button (click)="toggleSidebar()"
+      class="w-8 h-8 rounded-lg text-xs text-white hover:bg-white/15 grid lg:hidden place-items-center" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+        class="h-5 w-5 text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
@@ -39,19 +36,24 @@
 
   <div class="m-4 flex-1 overflow-y-auto">
     <ul class="mb-4 flex flex-col gap-1">
-      
+
       <!-- Dashboard -->
       <li>
-        <a routerLink="/Dashboard" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+        <a routerLink="/dashboard" (click)="closeOnMobile()">
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"></path>
-              <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43 z"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path
+                d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z">
+              </path>
+              <path
+                d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43 z">
+              </path>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">dashboard</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              dashboard</p>
           </button>
         </a>
       </li>
@@ -59,14 +61,17 @@
       <!-- Catedrático -->
       <li>
         <a routerLink="/catedratico" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.6-7.812-1.7a.75.75 0 01-.437-.695z"
+                clip-rule="evenodd" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Catedrático</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Catedrático</p>
           </button>
         </a>
       </li>
@@ -74,14 +79,17 @@
       <!-- Cuestionario -->
       <li>
         <a routerLink="/cuestionarios" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z" clip-rule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"
+                clip-rule="evenodd" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Cuestionario</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Cuestionario</p>
           </button>
         </a>
       </li>
@@ -89,14 +97,17 @@
       <!-- Cuestionarios Asignados -->
       <li>
         <a routerLink="/alumno-respuesta" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path fill-rule="evenodd" d="M10.5 3A1.5 1.5 0 009 4.5V6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V8.25A2.25 2.25 0 0018.75 6H15V4.5A1.5 1.5 0 0013.5 3h-3zm1.5 2.25a.75.75 0 00-.75.75v.75h2.25V6a.75.75 0 00-.75-.75h-.75zM7.5 9.75a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25zM7.5 13.5a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25zM7.5 17.25a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25z" clip-rule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M10.5 3A1.5 1.5 0 009 4.5V6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V8.25A2.25 2.25 0 0018.75 6H15V4.5A1.5 1.5 0 0013.5 3h-3zm1.5 2.25a.75.75 0 00-.75.75v.75h2.25V6a.75.75 0 00-.75-.75h-.75zM7.5 9.75a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25zM7.5 13.5a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25zM7.5 17.25a.75.75 0 000 1.5H9a.75.75 0 000-1.5H7.5zm3.75 0a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5h-5.25z"
+                clip-rule="evenodd" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Cuestionarios Asignados</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Cuestionarios Asignados</p>
           </button>
         </a>
       </li>
@@ -104,14 +115,17 @@
       <!-- Alumno -->
       <li>
         <a routerLink="/alumno" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                clip-rule="evenodd" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Alumno</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Alumno
+            </p>
           </button>
         </a>
       </li>
@@ -119,17 +133,47 @@
       <!-- Grado -->
       <li>
         <a routerLink="/grado" (click)="closeOnMobile()">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
             class="middle none font-sans font-bold center transition-all text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-inherit">
-              <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                clip-rule="evenodd" />
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Grado</p>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Grado
+            </p>
           </button>
         </a>
       </li>
+
+
+
+      <li>
+        <a routerLink="/" (click)="closeOnMobile()"
+          routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20"
+          [routerLinkActiveOptions]="{ exact: true }" class="font-sans font-bold transition-all text-xs py-3 rounded-lg
+           text-white hover:bg-white/10 active:bg-white/30
+           w-full flex items-center gap-4 px-4 capitalize">
+
+          <!-- ICONO REGRESAR -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0 7-7m-7 7h18" />
+
+          </svg>
+
+          <p class="block antialiased font-sans text-base leading-relaxed
+              text-inherit font-medium capitalize">
+            Volver hacia la presentación
+          </p>
+
+        </a>
+      </li>
+
+
 
     </ul>
   </div>

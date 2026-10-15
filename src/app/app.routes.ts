@@ -6,65 +6,71 @@ import { CatedraticoComponent } from './business/catedratico/catedratico/catedra
 import { GradoComponent } from './business/grado/grado/grado.component';
 import { ResponderCuestionarioComponent } from './business/cuestionario/respuesta-cuestionario/responder-cuestionario/responder-cuestionario.component';
 import { AlumnoRespuestaComponent } from './business/cuestionario/alumno-respuesta-cuestionario/alumno-respuesta/alumno-respuesta.component';
+import { PresentacionComponent } from './business/presentacion/presentacion/presentacion.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        loadComponent: () => import('./shared/components/layout/layout.component'),
-        children: [
-            {
-                path: 'dashboard',
-                loadComponent: () => import('./business/dashboard/dashboard.component')
-            },
-            {
-                path: 'profile',
-                loadComponent: () => import('./business/profile/profile.component')
-            },
-            {
-                path: 'tables',
-                loadComponent: () => import('./business/tables/tables.component')
-            },
-
-            {
-                path:'cuestionarios', component: CuestionariosComponent
-            },
-
-            {
-                path:'creacion-cuestionarios', component: CreacionCuestionarioComponent
-            },
 
 
-            {
-                path: 'alumno' , component: AlumnoComponent
-            },
+  {
+    path: '',
+    component: PresentacionComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    loadComponent: () => import('./shared/components/layout/layout.component'),
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./business/dashboard/dashboard.component')
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./business/profile/profile.component')
+      },
+      {
+        path: 'tables',
+        loadComponent: () => import('./business/tables/tables.component')
+      },
 
-             {
-                path: 'catedratico', component: CatedraticoComponent
-             },
-            
-            {
-                path: 'grado', component: GradoComponent
-            },
+      {
+        path: 'cuestionarios', component: CuestionariosComponent
+      },
 
-            {
-                path: 'responder-cuestionario',  component: ResponderCuestionarioComponent
-            },
+      {
+        path: 'creacion-cuestionarios', component: CreacionCuestionarioComponent
+      },
 
-            {
-                path: 'alumno-respuesta', component: AlumnoRespuestaComponent
 
-            },
-            
-            {
-                path: '',
-                redirectTo: 'dashboard',
-                pathMatch: 'full'
-            }
+      {
+        path: 'alumno', component: AlumnoComponent
+      },
 
-        ]
-    },
-    {
+      {
+        path: 'catedratico', component: CatedraticoComponent
+      },
+
+      {
+        path: 'grado', component: GradoComponent
+      },
+
+      {
+        path: 'responder-cuestionario', component: ResponderCuestionarioComponent
+      },
+
+      {
+        path: 'alumno-respuesta', component: AlumnoRespuestaComponent
+
+      },
+
+      {
         path: '**',
-        redirectTo: 'dashboard'
-    }
+        redirectTo: '',
+      }
+
+    ]
+
+  }
+
+
 ];
